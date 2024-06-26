@@ -6,7 +6,7 @@ This project implements an algorithmic trading bot that uses machine learning to
 
 ## SVC Model Performance
 
-We used the SVC classifier model from SKLearn's support vector machine (SVM) learning method to establish a baseline performance. Here are the key findings:
+I used the SVC classifier model from SKLearn's support vector machine (SVM) learning method to establish a baseline performance. Here are the key findings:
 
 - **Precision**: 0.50
 - **Recall**: 0.55
@@ -19,7 +19,7 @@ Baseline Model Performance: The baseline trading algorithm performed moderately 
 
 ## Adjusting the Training Dataset Size
 
-We experimented with different sizes of the training dataset by slicing the data into different periods. Here are the results:
+I experimented with different sizes of the training dataset by slicing the data into different periods. Here are the results:
 
 - **Training Window 1**: 3 months
     
@@ -34,7 +34,7 @@ Impact of increasing/decreasing the training window: Increasing the training win
 
 ## Adjusting SMA Input Features
 
-We adjusted the SMA input features by changing one or both of the SMA windows. Here are the results:
+I adjusted the SMA input features by changing one or both of the SMA windows. Here are the results:
 
 - **SMA Window 1**: 4 days (short), 100 days (long)
     
@@ -55,11 +55,11 @@ Based on our experiments, the set of parameters that best improved the trading a
 - **Long SMA Window**: 50 days
 - **Training Window**: 6 months
 
-Optimized Algorithm PerformanceThe optimized algorithm showed a noticeable improvement in precision and recall, leading to better overall performance compared to the baseline model.
+Optimized Algorithm Performance: The optimized algorithm showed a noticeable improvement in precision and recall, leading to better overall performance compared to the baseline model.
 
 ## Evaluating a New Machine Learning Classifier
 
-We implemented a new classifier, RandomForestClassifier, to compare its performance with the baseline model.
+I implemented a new classifier, RandomForestClassifier, to compare its performance with the baseline model.
 
 ## New Model Performance
 
@@ -80,4 +80,4 @@ New Model Performance Comparison to baseline model: The RandomForestClassifier s
 4. **Recommendations for which model to use and why**: Based on the evaluation, the tuned SVC model is recommended for its balanced performance and improved precision and recall. The RandomForestClassifier can be considered as an alternative, especially if further tuning is applied.
 5. **Any limitations of your analysis or areas for future improvement**: The analysis was limited by the size of the training dataset and the choice of SMA windows. Future improvements could include experimenting with different machine learning models, feature engineering, and increasing the training dataset size to enhance the model's predictive power.
 
-![[actual_vs_strategy_returns.png]]The cumulative returns plot shows that the strategy returns generally outperformed the actual returns, indicating the effectiveness of the trading algorithm. Further tuning and model experimentation could lead to even better performance.
+![](actual_vs_strategy_returns.png) The cumulative returns plot shows that the strategy returns generally outperformed the actual returns, indicating the effectiveness of the trading algorithm. Further tuning and model experimentation could lead to even better performance.
