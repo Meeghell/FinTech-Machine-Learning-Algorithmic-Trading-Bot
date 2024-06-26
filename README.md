@@ -6,14 +6,35 @@ This project implements an algorithmic trading bot that uses machine learning to
 
 ## SVC Model Performance
 
-I used the SVC classifier model from SKLearn's support vector machine (SVM) learning method to establish a baseline performance. Here are the key findings:
+We used the SVC classifier model from SKLearn's support vector machine (SVM) learning method to establish a baseline performance. Here are the key findings:
 
-- **Precision**: 0.50
-- **Recall**: 0.55
-- **F1-Score**: 0.43
-- **Accuracy**: 0.49
+- **Accuracy**: 0.55 (55%)
+- **Precision**:
+    
+    - Class -1.0: 0.43
+    - Class 1.0: 0.56
+    - Weighted Avg: 0.50
+    
+- **Recall**:
+    
+    - Class -1.0: 0.04
+    - Class 1.0: 0.96
+    - Weighted Avg: 0.55
+    
+- **F1-Score**:
+    
+    - Class -1.0: 0.07
+    - Class 1.0: 0.71
+    - Weighted Avg: 0.43
+    
 
-Baseline Model Performance: The baseline trading algorithm performed moderately well, with an accuracy of 49%. The precision and recall values indicate that the model has a balanced performance in predicting both positive and negative signals. However, the F1-score suggests that there is room for improvement in the model's predictive power.
+The baseline trading algorithm performed moderately well, with an overall accuracy of 55%. The model shows a significant imbalance in its predictions:
+
+1. It has high recall (0.96) for the positive class (1.0) but very low recall (0.04) for the negative class (-1.0).
+2. Precision is better balanced between the two classes (0.43 for -1.0 and 0.56 for 1.0).
+3. The F1-score, which balances precision and recall, is much higher for the positive class (0.71) compared to the negative class (0.07).
+
+This suggests that the model is biased towards predicting the positive class, which could lead to many false positives in a trading context. While it correctly identifies most positive instances, it struggles to identify negative instances accurately.
 
 ## Tuning the Trading Algorithm
 
@@ -57,27 +78,45 @@ Based on our experiments, the set of parameters that best improved the trading a
 
 Optimized Algorithm Performance: The optimized algorithm showed a noticeable improvement in precision and recall, leading to better overall performance compared to the baseline model.
 
-## Evaluating a New Machine Learning Classifier
+## New Model Performance (Random Forest Classifier)
 
-I implemented a new classifier, RandomForestClassifier, to compare its performance with the baseline model.
+Here are the key findings:
 
-## New Model Performance
+- **Accuracy**: 0.51 (51%)
+- **Precision**:
+    
+    - Class -1.0: 0.44
+    - Class 1.0: 0.56
+    - Weighted Avg: 0.50
+    
+- **Recall**:
+    
+    - Class -1.0: 0.35
+    - Class 1.0: 0.64
+    - Weighted Avg: 0.51
+    
+- **F1-Score**:
+    
+    - Class -1.0: 0.39
+    - Class 1.0: 0.60
+    - Weighted Avg: 0.51
+    
 
-- **Precision**: 0.50
-- **Recall**: 0.50
-- **F1-Score**: 0.49
-- **Accuracy**: 0.51
+The Random Forest Classifier shows a slight improvement over the baseline SVC model, with an overall accuracy of 51%. Here's a breakdown of its performance:
 
-New Model Performance Comparison to baseline model: The RandomForestClassifier showed a slight improvement in accuracy and F1-score compared to the SVC model. The precision and recall remained balanced, indicating a consistent performance. Comparison to tuned trading algorithm: The new model performed better than the baseline but was slightly outperformed by the tuned trading algorithm in terms of precision and recall.
+1. The model shows better balance in its predictions compared to the SVC model, with improved recall for the negative class (-1.0) and slightly reduced recall for the positive class (1.0).
+2. Precision is similar to the SVC model, with a slight improvement for the negative class and a minor decrease for the positive class.
+3. The F1-score shows improvement for the negative class (0.39 vs 0.07) and a slight decrease for the positive class (0.60 vs 0.71).
+4. The overall weighted average F1-score (0.51) is higher than that of the SVC model (0.43), indicating better overall performance.
 
 ## Evaluation Report
 
 ## Final Conclusions and Analysis
 
-1. **Overall performance of the baseline model**: The SVC model provided a balanced performance with moderate accuracy and F1-score. It served as a good starting point for further improvements.
-2. **Impact of tuning the algorithm**: Tuning the algorithm by adjusting the training window and SMA input features led to noticeable improvements in precision, recall, and overall performance.
-3. **Performance of the new machine learning classifier**: The RandomForestClassifier showed a slight improvement over the baseline model but was slightly less effective than the tuned SVC model.
-4. **Recommendations for which model to use and why**: Based on the evaluation, the tuned SVC model is recommended for its balanced performance and improved precision and recall. The RandomForestClassifier can be considered as an alternative, especially if further tuning is applied.
-5. **Any limitations of your analysis or areas for future improvement**: The analysis was limited by the size of the training dataset and the choice of SMA windows. Future improvements could include experimenting with different machine learning models, feature engineering, and increasing the training dataset size to enhance the model's predictive power.
+1. **Baseline SVC Model**: The SVC model showed moderate performance with 55% accuracy but had a significant bias towards the positive class, potentially leading to many false positives.
+2. **Random Forest Classifier**: This model demonstrated more balanced performance across both classes, addressing some of the bias issues seen in the SVC model. While the overall accuracy is slightly lower (51% vs 55%), the more balanced predictions suggest that this model may be more reliable across different market conditions.
+3. **Performance Comparison**: The Random Forest model shows improved performance in terms of balanced predictions and a higher overall F1-score, suggesting it may be better suited for capturing both upward and downward market movements.
+4. **Strategy Returns**: Based on the cumulative returns plot, both models' strategy returns generally outperform the actual returns, especially in the latter part of the testing period. This indicates that both models have captured useful patterns in the data that translate to potentially profitable trading decisions.
+5. **Recommendation**: While both models show promise, the Random Forest Classifier appears to be more robust due to its balanced performance across classes. It may be the preferred choice for a more stable trading strategy.
 
 ![](actual_vs_strategy_returns.png) The cumulative returns plot shows that the strategy returns generally outperformed the actual returns, indicating the effectiveness of the trading algorithm. Further tuning and model experimentation could lead to even better performance.
